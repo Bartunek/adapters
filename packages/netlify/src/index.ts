@@ -127,7 +127,7 @@ export default function netlifyIntegration(
 			import { createContext, trySerializeLocals } from 'astro/middleware';
 
 			export default async (request, context) => {
-				const ctx = createContext({ 
+				const ctx = createContext({
 					request,
 					params: {}
 				});
@@ -137,14 +137,14 @@ export default function netlifyIntegration(
 					request.headers.set("x-astro-locals", trySerializeLocals(otherLocals));
 					return context.next();
 				};
-			
+
 				return onRequest(ctx, next);
 			}
 
 			export const config = {
 				name: "Astro Middleware",
 				generator: "@astrojs/netlify@${packageVersion}",
-				path: "/*", excludedPath: ["/_astro/*", "/.netlify/images/*"]
+				path: "/*", excludedPath: ["/_astro/*", "/.netlify/images/*", "/.netlify/identity/*"]
 			};
 			`
 		);
